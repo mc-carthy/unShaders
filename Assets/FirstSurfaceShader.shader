@@ -2,9 +2,14 @@
 Shader "MyShaders/HelloShader" {
 
     // The properties are input fields that will be used in the shader function
+    // _myColour is the variable name in the surface code.
+    // "Example Colour" is the name in the editor.
+    // Color is the type
+    // (1, 1, 1, 1) is the default value
     Properties {
         _myColour ("Example Colour", Color) = (1, 1, 1, 1)
         _myEmission ("Example Emission", Color) = (1, 1, 1, 1)
+        // _myNormal ("Example Normal", Color) = (1, 1, 1, 1)
     }
 
     // This is where the input properties, model geometry, surface colouring and
@@ -27,13 +32,17 @@ Shader "MyShaders/HelloShader" {
             // Their types also need to be specified
             fixed4 _myColour;
             fixed4 _myEmission;
+            // fixed4 _myNormal;
 
             // This is the main shader function. IN represents the Input struct
             // Above. It also declares the type of output data to be expected.
             // The Lambert lighting model outputs a SurfaceOutput struct.
+            // Abledo is the base colour of the surface
+            // Emission is the light emitted from the surface
             void surf (Input IN, inout SurfaceOutput o) {
                 o.Albedo = _myColour.rgb;
                 o.Emission = _myEmission.rgb;
+                // o.Normal = _myNormal.rgb;
             }
         ENDCG
     }
